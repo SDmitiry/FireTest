@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Тест по уровню подготовки - \"" + ViewBag.QualificationName + "\"";
+}
+@using (Html.BeginForm("Index", "Qualification", new { id = ViewBag.Id }, FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    if (ViewBag.Сompleted == true)
+    {
+        <div class="row center"><h3>По данному уровню подготовки в базе @ViewBag.CountCurrent вопросов</h3></div>
+        <div class="row center"><h3>База выбираемых вопросов включает вопросы @ViewBag.Course года обучения</h3></div>
+        <br />
+        <div class="row center"><h3>Выберите количество вопросов</h3></div>
+        <div class="row center">
+            <input type="range" min="1" max="@ViewBag.CountMax" id="count" name="count" oninput="countQ()" value="1">           
+        </div>
+        <div class="row center">
+            <h4 id="countText">10</h4>
+            <script>
+                function countQ() {
+                    document.getElementById('countText').innerHTML = 10 * document.getElementById("count").value;
+                }
+            </script>
+        </div>
+        <div class="row center"><h3>Вы хотите начать тестирование?</h3></div>
+    }
+    else
+    {
+        @Html.Hidden("EndId", (int)ViewBag.EndId)
+      <div class="row"><h3>У Вас есть незаконченный тест по уровню подготовки "@ViewBag.QualificationName"</h3></div>
+        <div class="row"><h3>Хотите продолжить?</h3></div>
+    }
+    <div class="row center">
+        <button type="submit" value="Accept" name="submitButton" class="button">Да</button>
+    </div>
+    <div class="row center">
+        <button type="submit" value="Cancel" name="submitButton" class="button-Cancel">Нет</button>
+    </div>
+}

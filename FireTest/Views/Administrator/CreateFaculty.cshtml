@@ -1,0 +1,281 @@
+﻿@model FireTest.Models.FacultyViewQualifications
+@{
+    ViewBag.Title = "Добавить факультет";
+}
+@Styles.Render("~/Content/administrator")
+<div class="row">
+    <p id="validationName" class="text-danger"></p>
+    <div class="col-2">
+        Название
+    </div>
+    <div class="col-10">
+        @Html.TextBoxFor(m => m.Name)
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-6">
+        <p class="center">Бакалавриат</p>
+        <br />
+        <div class="textback rating-left">
+            <p class="center">@Html.TextBoxFor(m => m.Bachelor, new { type = "number", min = "1", max = "6", @readonly = true })</p>  
+        </div>
+    </div>
+    <div class="col-6">
+        <p class="center">Магистратура</p>
+        <br />
+        <div class="textback rating-right">           
+            <p class="center">@Html.TextBoxFor(m => m.Master, new { type = "number", min = "0", max = "6", @readonly = true })</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <p>Изображения должны иметь размер 200х200 пикселей.</p>
+    <p>Формат изображения png с альфа-каналом (прозрачностью).</p>
+</div>
+<p id="validationLevelsName" class="text-danger"></p>
+<p id="validationLevelsPictures" class="text-danger"></p>
+<div class="row" id="Qualifications">
+    <div class="col-6">
+        <div class="textback rating-left">
+            @for (int i = 0; i < Model.Bachelor; i++)
+            {
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            Название уровня подготовки
+                        </div>
+                        <div class="row">
+                            @if (Model.LevelsName == null)
+                            {
+                                <input name="LevelsName" type="text">
+                            }
+                            else
+                            {
+                                <input name="LevelsName" type="text" value=@Model.LevelsName[i]>
+                            }
+                        </div>
+                        <div class="row">
+                            Загрузите изображение уровня подготовки. Оно появится в квадрате справа
+                        </div>
+                        <div class="row">
+                            <input type="file" accept="image/*" id="ImgInpB_@i" onchange="ReadURL(this)" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <p style="text-align: center;" class="PrewImgInp">
+                            @if (Model.LevelsPictures == null)
+                            {
+                                <img name="LevelsPictures" id="PrewImgInpB_@i" alt="Пусто" />
+                            }
+                            else
+                            {
+                                <img name="LevelsPictures" id="PrewImgInpB_@i" alt="Пусто" src="@Html.Raw(Model.LevelsPictures[i])" />
+                            }
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="textback rating-right">
+            @for (int i = 0; i < Model.Master; i++)
+            {
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            Название уровня подготовки
+                        </div>
+                        <div class="row">
+                            @if (Model.LevelsName == null)
+                            {
+                                <input name="LevelsName" type="text">
+                            }
+                            else
+                            {
+                                <input name="LevelsName" type="text" value=@Model.LevelsName[i + Model.Bachelor]>
+                            }
+                        </div>
+                        <div class="row">
+                            Загрузите изображение уровня подготовки. Оно появится в квадрате справа
+                        </div>
+                        <div class="row">
+                            <input type="file" accept="image/*" id="ImgInpM_@i" onchange="ReadURL(this)" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <p style="text-align: center;" class="PrewImgInp">
+                            @if (Model.LevelsPictures == null)
+                            {
+                                <img name="LevelsPictures" id="PrewImgInpM_@i" alt="Пусто" />
+                            }
+                            else
+                            {
+                                <img name="LevelsPictures" id="PrewImgInpM_@i" alt="Пусто" src="@Html.Raw(Model.LevelsPictures[i + Model.Bachelor])" />
+                            }
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="row center">
+    <input type="submit" value="Сохранить" class="button" onclick="SubmitForm()" />
+</div>
+@section scripts
+{
+    <script>
+        (function ($) {
+            $.fn.number = function (customOptions) {
+                var options = {
+
+                    'containerClass': 'number-style',
+                    'minus': 'number-minus',
+                    'plus': 'number-plus',
+                    'containerTag': 'div',
+                    'btnTag': 'span'
+                };
+                options = $.extend(true, options, customOptions);
+                var input = this;
+                input.wrap('<' + options.containerTag + ' class="' + options.containerClass + '">');
+                var wrapper = input.parent();
+                wrapper.prepend('<' + options.btnTag + ' class="' + options.minus + '"></' + options.btnTag + '>');
+                var minus = wrapper.find('.' + options.minus);
+                wrapper.append('<' + options.btnTag + ' class="' + options.plus + '"></' + options.btnTag + '>');
+                var plus = wrapper.find('.' + options.plus);
+                var min = input.attr('min');
+                var max = input.attr('max');
+                if (input.attr('step')) {
+                    var step = +input.attr('step');
+                } else {
+                    var step = 1;
+                }
+                if (+input.val() <= +min) {
+                    minus.addClass('disabled');
+                }
+                if (+input.val() >= +max) {
+                    plus.addClass('disabled');
+                }
+                minus.click(function () {
+                    var input = $(this).parent().find('input');
+                    var value = input.val();
+                    if (+value > +min) {
+                        input.val(+value - step);
+                        AddQualification(input.attr('name'));
+                        if (+input.val() === +min) {
+                            input.prev('.' + options.minus).addClass('disabled');
+                        }
+                        if (input.next('.' + options.plus).hasClass('disabled')) {
+                            input.next('.' + options.plus).removeClass('disabled')
+                        }
+                    } else if (!min) {
+                        input.val(+value - step);
+                    }
+                });
+                plus.click(function () {
+                    var input = $(this).parent().find('input');
+                    var value = input.val();
+                    if (+value < +max) {
+                        input.val(+value + step);
+                        AddQualification(input.attr('name'));
+                        if (+input.val() === +max) {
+                            input.next('.' + options.plus).addClass('disabled');
+                        }
+                        if (input.prev('.' + options.minus).hasClass('disabled')) {
+                            input.prev('.' + options.minus).removeClass('disabled')
+                        }
+                    } else if (!max) {
+                        input.val(+value + step);
+                    }
+                });
+            };
+        })(jQuery);
+        $('input[type=number]').each(function () {
+            $(this).number();
+        });
+        function AddQualification(sender) {
+            var arrLN = [];
+            $('input[name^=LevelsName]').each(function () {
+                arrLN.push($(this).val());
+            });
+            var arrLP = [];
+            $('img[id^=PrewImg]').each(function () {
+                arrLP.push($(this).attr('src'));
+            });
+            var data = {
+                Bachelor: $('#Bachelor').val(),
+                Master: $('#Master').val(),
+                LevelsName: arrLN,
+                LevelsPictures: arrLP,
+                Sender: sender
+            };
+            $.get(
+                {
+                    type: "POST",
+                    url: "/Administrator/AddQualification",
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function (result) {
+                        $("#Qualifications").html(result);
+                    },
+                });
+        }
+        function SubmitForm() {
+            var error = false;
+            $('#validationLevelsPictures').html('');
+            $('#validationName').html('');
+            $('#validationLevelsName').html('');
+            var value = $('#Name').val();
+            if (!value || value.lenght === 0) {
+                $('#validationName').html('Нужно указать название факультета');
+                error = true;
+            }
+            var arrLN = [];
+            $('input[name^=LevelsName]').each(function () {
+                value = $(this).val();
+                if (!value || value.lenght === 0) {
+                    $('#validationLevelsName').html('Нужно указать все названия уровней подготовки');
+                    error = true;
+                }
+                arrLN.push(value);
+            });
+            var arrLP = [];
+            $('img[id^=PrewImg]').each(function () {
+                value = $(this).attr('src');
+                if (!value || value.lenght === 0) {
+                    $('#validationLevelsPictures').html('Нужно загрузить все изображения для уровней подготовки');
+                    error = true;
+                }
+                arrLP.push(value);
+            });
+            if (error) {
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                return;
+            }
+            var data = {
+                Name: $('#Name').val(),
+                Bachelor: $('#Bachelor').val(),
+                Master: $('#Master').val(),
+                LevelsName: arrLN,
+                LevelsPictures: arrLP,
+            };
+            $.ajax({
+                type: "POST",
+                url: "/Administrator/CreateFaculty",
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+            });
+        }
+        function ReadURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#Prew' + input.id).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}

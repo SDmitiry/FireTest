@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Статистика";
+}
+<div class="spoiler">
+    <span class="headline">Статистика обучаемых</span>
+</div>
+<div class="-open">
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-4">
+            <a href="Groups" class="button">Статистика групп</a>
+        </div>
+        <div class="col-4">
+            <a href="Courses" class="button">Статистика курсов</a>
+        </div>
+        <div class="col-4">
+            <a href="Users" class="button">Статистика студентов</a>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="spoiler">
+    <span class="headline">Сравнение статистики обучаемых</span>
+</div>
+<div class="-open">
+    <br />
+    <br /> 
+    <div class="row">
+        <div class="col-6">
+            <a href="CompareGroups" class="button">Сравнение групп</a>
+        </div>
+        <div class="col-6">
+            <a href="CompareCourses" class="button">Сравнение курсов</a>
+        </div> 
+    </div>
+</div>
+<br />
+<br />
+<div class="spoiler">
+    <span class="headline">Ваша статистика</span>
+</div>
+<div class="-closed">
+    @{ Html.RenderAction("UserStatistics", "Statistics"); }
+</div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/statistic")
+    <script>
+        var chartB = document.getElementById("chartB");
+        var PieChartB = new Chart(chartB, configB);
+        var chartA = document.getElementById("chartA");
+        var PieChartA = new Chart(chartA, configA);
+        var chartQ1 = document.getElementById("chartQ1");
+        var PieChartQ1 = new Chart(chartQ1, configQ1);
+        var chartQ2 = document.getElementById("chartQ2");
+        var PieChartQ2 = new Chart(chartQ2, configQ2);
+        var chartQ3 = document.getElementById("chartQ3");
+        var PieChartQ3 = new Chart(chartQ3, configQ3);
+        var chartQ4 = document.getElementById("chartQ4");
+        var PieChartQ4 = new Chart(chartQ4, configQ4);
+        var chartQ5 = document.getElementById("chartQ5");
+        var PieChartQ5 = new Chart(chartQ5, configQ5);
+    </script>
+}

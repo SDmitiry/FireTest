@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Пользователи";
+}
+@Styles.Render("~/Content/administrator")
+@using (Ajax.BeginForm("SelectTeacherAjax", new AjaxOptions
+{
+    HttpMethod = "Get",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "Users",
+}))
+{
+    <div class="row">
+        <div class="col-2">Поиск</div>
+        <div class="col-10">
+            <input name="SearchString" type="text" oninput="$(this.form).submit();">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10 col-offset-2">
+            <p>Поиск осуществляется по фамилии, имени, отчеству и СНИЛС</p>
+        </div>
+    </div>
+}
+<div id="Users">
+    @{ Html.RenderAction("SelectTeacherAjax", new { Page = 1 }); }
+</div>

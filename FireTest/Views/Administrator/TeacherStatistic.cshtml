@@ -1,0 +1,53 @@
+﻿@model List<FireTest.Models.TeacherStatistics>
+@{
+    ViewBag.Title = "Статистика преподавателя";
+}
+@Styles.Render("~/Content/administrator")
+<h3>Статистика <span><img class="avatar-mini" src="~/Images/Avatars/@ViewBag.Avatar" /></span> @ViewBag.Name</h3>
+<div class="row">
+    <table>
+        <tr>
+            <th>
+                Дата тестирования
+            </th>
+            <th>
+                Группа
+            </th>
+            <th>
+                Дисциплина / Уровень подготовки
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="center">
+                <td>
+                    @item.Date.ToString("dd MMMM yyyy")
+                    <hr />
+                    <div class="snils">
+                    @if (item.IsOver.Contains("прошло"))
+                    {
+                        <span style="color:rgb(114, 191, 230);">@item.IsOver</span>
+                    }
+                    else
+                    {
+                        @item.IsOver
+                    }
+                    </div>
+                </td>
+                <td>
+                    @if (item.Group == "-1")
+                    {
+                        <span>Преподаватели</span>
+                    }
+                    else
+                    {
+                        @item.Group
+                    }
+                </td>
+                <td>
+                    @item.Qualification
+                </td>
+            </tr>
+        }
+    </table>
+</div>

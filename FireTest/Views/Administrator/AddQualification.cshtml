@@ -1,0 +1,85 @@
+﻿@model FireTest.Models.FacultyViewQualifications
+<div class="col-6">
+    <div class="textback rating-left">
+        @for (int i = 0; i < Model.Bachelor; i++)
+        {
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        Название уровня подготовки
+                    </div>
+                    <div class="row">
+                        @if (Model.LevelsName == null)
+                        {
+                            <input name="LevelsName" type="text">
+                        }
+                        else
+                        {
+                            <input name="LevelsName" type="text" value=@Model.LevelsName[i]>
+                        }
+                    </div>
+                    <div class="row">
+                        Загрузите изображение уровня подготовки. Оно появится в квадрате справа
+                    </div>
+                    <div class="row">
+                        <input type="file" accept="image/*" id="ImgInpB_@i" onchange="ReadURL(this)" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <p style="text-align: center;" class="PrewImgInp">
+                        @if (Model.LevelsPictures == null)
+                        {
+                            <img name="LevelsPictures" id="PrewImgInpB_@i" alt="Пусто" />
+                        }
+                        else
+                        {
+                            <img name="LevelsPictures" id="PrewImgInpB_@i" alt="Пусто" src="@Html.Raw(Model.LevelsPictures[i])" />
+                        }
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="col-6">
+    <div class="textback rating-right">
+        @for (int i = 0; i < Model.Master; i++)
+        {
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        Название уровня подготовки
+                    </div>
+                    <div class="row">
+                        @if (Model.LevelsName == null)
+                        {
+                            <input name="LevelsName" type="text">
+                        }
+                        else
+                        {
+                            <input name="LevelsName" type="text" value=@Model.LevelsName[i + Model.Bachelor]>
+                        }
+                    </div>
+                    <div class="row">
+                        Загрузите изображение уровня подготовки. Оно появится в квадрате справа
+                    </div>
+                    <div class="row">
+                        <input type="file" accept="image/*" id="ImgInpM_@i" onchange="ReadURL(this)" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <p style="text-align: center;" class="PrewImgInp">
+                        @if (Model.LevelsPictures == null)
+                        {
+                            <img name="LevelsPictures" id="PrewImgInpM_@i" alt="Пусто" />
+                        }
+                        else
+                        {
+                            <img name="LevelsPictures" id="PrewImgInpM_@i" alt="Пусто" src="@Html.Raw(Model.LevelsPictures[i + Model.Bachelor])" />
+                        }
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

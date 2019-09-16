@@ -1,0 +1,43 @@
+﻿@model IEnumerable<FireTest.Models.TeacherFinishTest>
+<div class="substrate">
+    <div class="row"><h3>Создать итоговое тестирование по уровню подготовки</h3></div>
+    <div class="row">Данный раздел позволяет выбрать вопросы из базы данных для создания итогового теста по определенной квалификации</div>
+    <div class="row" id="Tests">
+        <table>
+            <tr>
+                <th width="60%">
+                    Созданные тестирования:
+                </th>
+                <th>
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameTest)
+                        @{ 
+                            int count = 0;
+                            if (!string.IsNullOrEmpty(item.Questions) && item.Questions.Length != 0)
+                            {
+                                count = item.Questions.Split('|').Count();
+                            }
+                            <p>(Вопросов в тесте <span style="color:rgb(114, 191, 230);">@count</span>. Минимум <span style="color:rgb(255, 115, 0);">@ViewBag.Minimum</span>)</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Редактировать", "CreateTestFinish", "Teacher", new { idTest = item.Id }, null) |
+                        @Html.ActionLink("Подробности", "DetailsFinish", "Teacher", new { id = item.Id }, null) |
+                        @Html.ActionLink("Удалить", "DeleteFinish", "Teacher", new { id = item.Id }, null)
+                    </td>
+                </tr>
+            }
+        </table>
+        <div class="row">
+            <div class="col-4">
+                <a href="../Teacher/CreateTestFinishPrepare"><button class="button" style="width: 90%;">Создать итоговый тест</button></a>
+            </div>
+        </div>
+    </div>
+</div>

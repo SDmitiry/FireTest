@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Дисциплины";
+}
+@Styles.Render("~/Content/administrator")
+@using (Ajax.BeginForm("TeacherSubjectsAjax", new AjaxOptions
+{
+    HttpMethod = "Get",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "Subjects",
+}))
+{
+    @Html.Hidden("userId", (string)ViewBag.userId)
+    <div class="row">
+        <h3>Поиск<span class="search"></span><input id="SearchString" name="SearchString" type="text"></h3>
+    </div>
+}
+<div id="Subjects">
+    @{ Html.RenderAction("TeacherSubjectsAjax", new { Page = 1, userId = ViewBag.userId }); }
+</div>
+@section scripts
+{
+    <script>
+    $('#SearchString').keyup(function () {
+        $(this.form).submit();
+    });
+    </script>
+}

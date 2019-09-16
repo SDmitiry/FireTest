@@ -1,0 +1,85 @@
+﻿@model List<FireTest.Models.TestWrongAnswers>
+@{
+    ViewBag.Title = "Тест по дисциплине - \"" + ViewBag.DisciplineName + "\"";
+}
+<div class="row endHeader">
+    <div class="center"><h3>Тест по дисциплине - "@((string)ViewBag.DisciplineName)" пройден!</h3></div>
+</div>
+<div class="row">
+    <div class="col-3 center">
+        <img class="avatar" src="@ViewBag.Avatar" />
+    </div>
+    <div class="col-3 center">
+        <div class="chartSelfy">
+            <canvas id="chart" />
+        </div>
+        <div class="row">
+            @if (@ViewBag.RightP >= 70 && @ViewBag.RightP < 90)
+            {
+                <h3>Хорошо</h3>
+            }
+            @if (@ViewBag.RightP >= 90)
+            {
+                <h3>Отлично</h3>
+            }
+            @if (@ViewBag.RightP >= 50 && @ViewBag.RightP < 70)
+            {
+                <h3>Удовлетворительно</h3>
+            }
+            @if (@ViewBag.RightP < 50)
+            {
+                <h3>Плохо</h3>
+            }
+            <br />
+            <p>Правильных ответов @ViewBag.RightP%</p>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="textback">
+            <div class="row"><h5><b>Всего вопросов: @ViewBag.Count</b></h5></div>
+            <div class="row"><h5><b>Правильных ответов: @ViewBag.Right</b></h5></div>
+            <div class="row"><h5><b>Неправильных ответов: @(ViewBag.Count - ViewBag.Right)</b></h5></div>
+            <hr />
+            <div class="row center">
+                <a href="@Url.Action("DisciplineWrongDetails", new { id = ViewBag.Details, @class="button-Cancel" })">Посмотреть детализацию неправильных ответов</a>
+            </div>
+            <hr />
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="row">
+    @{ Html.RenderAction("Rating", "Home"); }
+</div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/statistic")
+    <script>
+        var option = {
+            responsive: true,
+            legend: {
+                display: false
+            },
+            percentageInnerCutout: 5,
+            tooltips: {
+                enabled: false
+            },
+        };
+        var config = {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [@ViewBag.RightP, 100-@ViewBag.RightP],
+                    backgroundColor: [
+                        "#ff7300",
+                        "#70bee6",
+                    ],
+                }],
+            },
+            options: option
+        };
+        var chart = document.getElementById("chart");
+        var PieChart = new Chart(chart, config);
+    </script>
+}

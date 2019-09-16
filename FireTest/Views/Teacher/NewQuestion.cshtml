@@ -1,0 +1,326 @@
+﻿@model FireTest.Models.ViewCreateQuestion
+@{
+    ViewBag.Title = "Добавить вопрос";
+}
+@Styles.Render("~/Content/administrator")
+@using (Html.BeginForm("NewQuestion", "Teacher", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <p class="text-success">@ViewBag.StatusMessage</p>
+    <div class="row center">
+        <h4>Добавить вопрос</h4>
+        <br>
+        <div class="row">
+            <div class="col-2">
+                Кафедра
+            </div>
+            <div class="col-10">
+                @Html.DropDownList("Departments", ViewBag.Departments as SelectList)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                Дисциплина
+            </div>
+            <div class="col-10">
+                @Html.DropDownList("Subjects", ViewBag.Subjects as SelectList)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                Курс
+            </div>
+            <div class="col-10">
+                @Html.DropDownList("Courses", ViewBag.Courses as SelectList)
+            </div>
+        </div>
+        <p class="text-success">@ViewBag.ErrorFaculty</p>
+        <div class="row">
+            <div class="col-2">
+                Факультет
+            </div>
+            <div class="col-10 answers left">
+                @{
+                    foreach (var item in Model.Faculties)
+                    {
+                        <fieldset class="standart">
+                            <input id="[@item.Id]" type="checkbox" name="Faculties" value="[@item.Id]" @(item.Check ? "checked" : "") />
+                            <label for="[@item.Id]">
+                                <span>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </span>
+                            </label>
+                        </fieldset>
+                    }
+                }
+            </div>
+        </div>
+        @Html.ValidationMessageFor(model => model.QuestionText, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-2">
+                Текст вопроса
+            </div>
+            <div class="col-10">
+                @Html.TextAreaFor(model => model.QuestionText, 5, 20, null)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                Раздел
+            </div>
+            <div class="col-10">
+                @Html.DropDownList("OldTags", ViewBag.OldTags as SelectList)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                или новый
+            </div>
+            <div class="col-10">
+                @Html.TextAreaFor(model => model.Tag)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                Изображение
+            </div>
+            <div class="col-10 left">
+                <label class="file-upload">
+                    <mark>Файл не выбран</mark>
+                    <input type="file" name="uploadfile" accept="image/jpeg,image/png,image/gif,image/jpeg">
+                    <span class="file-upload-button">Выбрать</span>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="type-tabs textback">
+                @if (ViewBag.Type == 1)
+                {
+                    <label for="type-tab-1" class="type-tab active">Обычный вопрос</label>
+                }
+                else
+                {
+                    <label for="type-tab-1" class="type-tab">Обычный вопрос</label>
+                }
+                @if (ViewBag.Type == 2)
+                {
+                    <label for="type-tab-2" class="type-tab active">Вопрос на последовательность</label>
+                }
+                else
+                {
+                    <label for="type-tab-2" class="type-tab">Вопрос на последовательность</label>
+                }
+                @if (ViewBag.Type == 3)
+                {
+                <label for="type-tab-3" class="type-tab active">Вопрос на соответствие</label>
+                }
+                else
+                {
+                    <label for="type-tab-3" class="type-tab">Вопрос на соответствие</label>
+                }
+            </div>
+        </div>
+        @if (ViewBag.Type == 1)
+        {
+            <input id="type-tab-1" name="Type" type="radio" checked="checked" class="type-radio" value="1" />
+        }
+        else
+        {
+            <input id="type-tab-1" name="Type" type="radio" class="type-radio" value="1" />
+        }
+        <div class="type-content">
+            <div>@Html.ValidationMessageFor(model => model.Answers, "", new { @class = "text-danger" })</div>
+            <div>@Html.ValidationMessageFor(model => model.AnswersCorrects, "", new { @class = "text-danger" })</div>
+            <div class="row">
+                <div class="row text-center">
+                    <div class="col-2">
+                        № п/п
+                    </div>
+                    <div class="col-8">
+                        Текст ответов
+                    </div>
+                    <div>
+                        Правильный
+                    </div>
+                </div>
+                @for (int i = 0; i < 8; i++)
+                {
+                <div class="row">
+                    <div class="col-2">
+                        <b>@(i + 1)</b>
+                    </div>
+                    <div class="col-8">
+                        @Html.TextAreaFor(model => model.Answers[i])
+                    </div>
+                    <div class="col-2 correct">
+                        @if (Model != null && Model.AnswersCorrects != null && Model.AnswersCorrects.Contains(i))
+                        {
+                            <input id="@i" type="checkbox" name="AnswersCorrects" value="@i" checked="checked" />
+                        }
+                        else
+                        {
+                            <input id="@i" type="checkbox" name="AnswersCorrects" value="@i" />
+                        }
+                        <label for="@i"></label>
+                    </div>
+                </div>
+        }
+            </div>
+        </div>
+        @if (ViewBag.Type == 2)
+    {
+        <input id="type-tab-2" name="Type" type="radio" checked="checked" class="type-radio" value="2" />
+}
+else
+{
+    <input id="type-tab-2" name="Type" type="radio" class="type-radio" value="2" />
+}
+        <div class="type-content">
+            <p class="text-success">@ViewBag.Error</p>
+            <div class="row">
+                <div class="textback">
+                    Расположите ответы в правильном порядке
+                </div>
+                @for (int i = 0; i < 8; i++)
+            {
+                <div class="row">
+                    @if (ViewBag.Answers != null && ViewBag.Answers[i] != null)
+                {
+                    <textarea cols="20" id="AnswersSequence[@i]" name="AnswersSequence[@i]" rows="2">@ViewBag.Answers[i]</textarea>
+            }
+            else
+            {
+                <textarea cols="20" id="AnswersSequence[@i]" name="AnswersSequence[@i]" rows="2"></textarea>
+        }
+                </div>
+        }
+            </div>
+        </div>
+        @if (ViewBag.Type == 3)
+    {
+        <input id="type-tab-3" name="Type" type="radio" checked="checked" class="type-radio" value="3" />
+}
+else
+{
+    <input id="type-tab-3" name="Type" type="radio" class="type-radio" value="3" />
+}
+        <div class="type-content">
+            <div class="row">
+                <p class="text-success">@ViewBag.Error</p>
+                <div class="textback">
+                    Расположите ответы в правильном порядке по парам
+                </div>
+                <div class="row">
+                    @for (int i = 0; i < 4; i++)
+                {
+                    <div class="col-5">
+                        <div class="row">
+                            @if (ViewBag.Answers != null && ViewBag.Answers[i] != null)
+                        {
+                            <textarea cols="20" id="AnswersConformity[@i]" name="AnswersConformity[@i]" rows="2">@ViewBag.Answers[i]</textarea>
+                    }
+                    else
+                    {
+                        <textarea cols="20" id="AnswersConformity[@i]" name="AnswersConformity[@i]" rows="2"></textarea>
+                }
+                        </div>
+                    </div>
+                    <div class="col-2"><span class="equals">=</span></div>
+                    <div class="col-5">
+                        <div class="row">
+                            @if (ViewBag.Answers != null && ViewBag.Answers[i + 4] != null)
+                        {
+                            <textarea cols="20" id="AnswersConformity[@(i+4)]" name="AnswersConformity[@(i+4)]" rows="2">@ViewBag.Answers[i + 4]</textarea>
+                    }
+                    else
+                    {
+                        <textarea cols="20" id="AnswersConformity[@(i+4)]" name="AnswersConformity[@(i+4)]" rows="2"></textarea>
+                }
+                        </div>
+                    </div>
+            }
+                </div>
+            </div>
+        </div>
+        <div class="row left">
+            @Html.Partial("LaTex")
+        </div>
+        <div class="row">
+            <input type="submit" class="button" />
+        </div>
+    </div>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            var wrapper = $(".file-upload"),
+                inp = wrapper.find("input"),
+                lbl = wrapper.find("mark");
+
+            var file_api = (window.File && window.FileReader && window.FileList && window.Blob) ? true : false;
+
+            inp.change(function () {
+                var file_name;
+                if (file_api && inp[0].files[0])
+                    file_name = inp[0].files[0].name;
+                else
+                    file_name = inp.val().replace("C:\\fakepath\\", '');
+
+                if (!file_name.length)
+                    return;
+
+                if (lbl.is(":visible")) {
+                    lbl.text(file_name);
+                }
+            }).change();
+        });
+        $("#formula_text").on("change input paste keyup", function () {
+            formula_refresh();
+        });
+        function formula_text_insert(value) {
+            $("#formula_text").val($("#formula_text").val() + value);
+            formula_refresh();
+        };
+        function formula_refresh() {
+            $("#formula").html("$$" + $("#formula_text").val() + "$$");
+            if ($("#L1").prop("checked")) {
+                $("#formula_text_copy").html("$$" + $("#formula_text").val() + "$$");
+            }
+            else {
+                $("#formula_text_copy").html("\\(" + $("#formula_text").val() + "\\)");
+            }
+            $('[name=TypeLatex]').change(function () {
+                if ($("#L1").prop("checked")) {
+                    $("#formula_text_copy").html("$$" + $("#formula_text").val() + "$$");
+                }
+                else {
+                    $("#formula_text_copy").html("\\(" + $("#formula_text").val() + "\\)");
+                }
+            });
+            if ($("#formula_text").val() == "") {
+                $("#formula_text_copy").html("&nbsp;");
+                $("#formula").empty();
+            }
+            MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'formula']);
+        }
+        $(".type-tab").click(function () {
+            $('.type-tab').removeClass("active");
+            $(this).addClass("active");
+        });
+
+        $(function () {
+            $("#Subjects").change(function () {
+                $.post("@Url.Action("UpdateTags", "Teacher")?Subjects=" + $(this).val(), function(res) {
+                    if (res.Success === "true") {
+                        $('#OldTags').empty();
+                        $('#OldTags').append(res.Tags);
+                        $('#OldTags').trigger("chosen:updated");
+                    }
+                });
+            });
+        });
+    </script>
+}

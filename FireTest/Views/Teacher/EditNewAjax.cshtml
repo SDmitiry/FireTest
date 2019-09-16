@@ -1,0 +1,63 @@
+﻿@model PagedList.IPagedList<FireTest.Models.SubjectAccess>
+@using PagedList.Mvc;
+@using (Ajax.BeginForm("EditNewAjax", null, new AjaxOptions
+{
+    HttpMethod = "Get",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "QuestionsNew",
+}, new { id = "New" }))
+{
+    if (ViewBag.Submit == true)
+    {
+        <script>
+            $('#Old').submit();
+        </script>
+    }
+    @Html.Hidden("page", (int)ViewBag.page)
+    @Html.Hidden("currentFilter", (string)ViewBag.CurrentFilter)
+    <div>
+        Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("EditNewAjax",
+        new { page, currentFilter = ViewBag.CurrentFilter, Tags = Session["Tags"], Subjects = Session["Subjects"] }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "QuestionsNew" }))
+    </div>
+    <div class="row">
+        <table>
+            <tr>
+                <th>
+                    Вопросы
+                </th>
+                <th>
+                    В тесте?
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td class="center" width="15%">
+                        <div class="No">
+                            <button type="submit" value="@item.Id" name="submitButton"></button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div>
+        Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("EditNewAjax",
+        new { page, currentFilter = ViewBag.CurrentFilter, Tags = Session["Tags"], Subjects = Session["Subjects"] }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "QuestionsNew" }))
+    </div>
+    <script>
+        $('#Tags').empty();
+        $('#Tags').append('@Html.Raw(ViewBag.Tags)');
+        $('#Tags').trigger("chosen:updated");
+    </script>
+}

@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{21847CC5-DE82-4B66-9497-5396AE40BCA4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FireTest</RootNamespace>
+    <AssemblyName>FireTest</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44374</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministratorController.cs" />
+    <Compile Include="Controllers\BattlesController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\DisciplinesController.cs" />
+    <Compile Include="Controllers\ExaminationController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\QualificationController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Jobs\UpdateSheduler.cs" />
+    <Compile Include="Jobs\UpdateUsers.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Decliner.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\QuestionsModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Administrator\AddQualification.cshtml" />
+    <Content Include="Views\Administrator\AddSubject.cshtml" />
+    <Content Include="Views\Administrator\CreateFaculty.cshtml" />
+    <Content Include="Views\Administrator\DeleteFaculty.cshtml" />
+    <Content Include="Views\Administrator\DeleteSubject.cshtml" />
+    <Content Include="Views\Administrator\DeleteSubjectConfirm.cshtml" />
+    <Content Include="Views\Administrator\DeleteSubjectCount.cshtml" />
+    <Content Include="Views\Administrator\DeleteUser.cshtml" />
+    <Content Include="Views\Administrator\EditFaculty.cshtml" />
+    <Content Include="Views\Administrator\Faculties.cshtml" />
+    <Content Include="Views\Administrator\Index.cshtml" />
+    <Content Include="Views\Administrator\MessageOfTheDay.cshtml" />
+    <Content Include="Views\Administrator\SelectTeacher.cshtml" />
+    <Content Include="Views\Administrator\SelectTeacherAjax.cshtml" />
+    <Content Include="Views\Administrator\SelectTeacherStatistic.cshtml" />
+    <Content Include="Views\Administrator\SelectTeacherStatisticAjax.cshtml" />
+    <Content Include="Views\Administrator\TeacherStatistic.cshtml" />
+    <Content Include="Views\Administrator\TeacherSubjects.cshtml" />
+    <Content Include="Views\Administrator\TeacherSubjectsAjax.cshtml" />
+    <Content Include="Views\Administrator\Users.cshtml" />
+    <Content Include="Views\Administrator\UsersAjax.cshtml" />
+    <Content Include="Views\Administrator\ViewFaculty.cshtml" />
+    <Content Include="Views\Battles\BattleEnd.cshtml" />
+    <Content Include="Views\Battles\BattleEndWait.cshtml" />
+    <Content Include="Views\Battles\BattleInvite.cshtml" />
+    <Content Include="Views\Battles\BattleInvitePopup.cshtml" />
+    <Content Include="Views\Battles\Fight.cshtml" />
+    <Content Include="Views\Battles\FightQuestions.cshtml" />
+    <Content Include="Views\Battles\FightQuestionsRoW.cshtml" />
+    <Content Include="Views\Battles\Finish.cshtml" />
+    <Content Include="Views\Battles\Index.cshtml" />
+    <Content Include="Views\Battles\Prepare.cshtml" />
+    <Content Include="Views\Battles\Users.cshtml" />
+    <Content Include="Views\Battles\Wait.cshtml" />
+    <Content Include="Views\Battles\WaitConfirm.cshtml" />
+    <Content Include="Views\Calendar\Index.cshtml" />
+    <Content Include="Views\Disciplines\DisciplineTest.cshtml" />
+    <Content Include="Views\Disciplines\DisciplineTestEnd.cshtml" />
+    <Content Include="Views\Disciplines\DisciplineTestQuestions.cshtml" />
+    <Content Include="Views\Disciplines\DisciplineWrongDetails.cshtml" />
+    <Content Include="Views\Disciplines\Index.cshtml" />
+    <Content Include="Views\Disciplines\IndexCount.cshtml" />
+    <Content Include="Views\Examination\Access.cshtml" />
+    <Content Include="Views\Examination\End.cshtml" />
+    <Content Include="Views\Examination\Index.cshtml" />
+    <Content Include="Views\Examination\Questions.cshtml" />
+    <Content Include="Views\Home\Awards.cshtml" />
+    <Content Include="Views\Home\Departments.cshtml" />
+    <Content Include="Views\Home\Load.cshtml" />
+    <Content Include="Views\Home\Menu.cshtml" />
+    <Content Include="Views\Home\Mobile.cshtml" />
+    <Content Include="Views\Home\Rating.cshtml" />
+    <Content Include="Views\Home\RatingPlace.cshtml" />
+    <Content Include="Views\Home\UserInfo.cshtml" />
+    <Content Include="Views\Manage\AvatarUpload.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Qualification\Index.cshtml" />
+    <Content Include="Views\Qualification\QualificationTest.cshtml" />
+    <Content Include="Views\Qualification\QualificationTestEnd.cshtml" />
+    <Content Include="Views\Qualification\QualificationTestQuestions.cshtml" />
+    <Content Include="Views\Qualification\QualificationWrongDetails.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\Skill\Index.cshtml" />
+    <Content Include="Views\Statistics\CompareCourses.cshtml" />
+    <Content Include="Views\Statistics\CompareCoursesAnswers.cshtml" />
+    <Content Include="Views\Statistics\CompareCoursesRange.cshtml" />
+    <Content Include="Views\Statistics\CompareGroups.cshtml" />
+    <Content Include="Views\Statistics\CompareGroupsAnswers.cshtml" />
+    <Content Include="Views\Statistics\CompareGroupsRange.cshtml" />
+    <Content Include="Views\Statistics\CountAnswers.cshtml" />
+    <Content Include="Views\Statistics\CountBattles.cshtml" />
+    <Content Include="Views\Statistics\Courses.cshtml" />
+    <Content Include="Views\Statistics\CoursesAnswers.cshtml" />
+    <Content Include="Views\Statistics\CoursesBattles.cshtml" />
+    <Content Include="Views\Statistics\Groups.cshtml" />
+    <Content Include="Views\Statistics\GroupsAnswers.cshtml" />
+    <Content Include="Views\Statistics\GroupsBattles.cshtml" />
+    <Content Include="Views\Statistics\Index.cshtml" />
+    <Content Include="Views\Statistics\IndexUser.cshtml" />
+    <Content Include="Views\Statistics\MonthDateRangeCourses.cshtml" />
+    <Content Include="Views\Statistics\MonthDateRangeGroups.cshtml" />
+    <Content Include="Views\Statistics\MonthDateRangeUser.cshtml" />
+    <Content Include="Views\Statistics\SelectDateRangeCourses.cshtml" />
+    <Content Include="Views\Statistics\SelectDateRangeGroups.cshtml" />
+    <Content Include="Views\Statistics\SelectDateRangeUser.cshtml" />
+    <Content Include="Views\Statistics\UserAnswers.cshtml" />
+    <Content Include="Views\Statistics\UserBattles.cshtml" />
+    <Content Include="Views\Statistics\Users.cshtml" />
+    <Content Include="Views\Statistics\UsersAjax.cshtml" />
+    <Content Include="Views\Statistics\UsersStatistics.cshtml" />
+    <Content Include="Views\Statistics\UserStatistics.cshtml" />
+    <Content Include="Views\Teacher\AddParagraph.cshtml" />
+    <Content Include="Views\Teacher\CreateExam.cshtml" />
+    <Content Include="Views\Teacher\CreateTest.cshtml" />
+    <Content Include="Views\Teacher\CreateTestAjax.cshtml" />
+    <Content Include="Views\Teacher\CreateTestFinish.cshtml" />
+    <Content Include="Views\Teacher\CreateTestFinishAjax.cshtml" />
+    <Content Include="Views\Teacher\CreateTestFinishPrepare.cshtml" />
+    <Content Include="Views\Teacher\CreateTestFinishPrepareAjax.cshtml" />
+    <Content Include="Views\Teacher\Delete.cshtml" />
+    <Content Include="Views\Teacher\DeleteExams.cshtml" />
+    <Content Include="Views\Teacher\DeleteFinish.cshtml" />
+    <Content Include="Views\Teacher\DeleteQuestion.cshtml" />
+    <Content Include="Views\Teacher\DeleteQuestionSelect.cshtml" />
+    <Content Include="Views\Teacher\DeleteQuestionSelectAjax.cshtml" />
+    <Content Include="Views\Teacher\Details.cshtml" />
+    <Content Include="Views\Teacher\DetailsExams.cshtml" />
+    <Content Include="Views\Teacher\DetailsFinish.cshtml" />
+    <Content Include="Views\Teacher\Edit.cshtml" />
+    <Content Include="Views\Teacher\EditExams.cshtml" />
+    <Content Include="Views\Teacher\EditNewAjax.cshtml" />
+    <Content Include="Views\Teacher\EditOldAjax.cshtml" />
+    <Content Include="Views\Teacher\EditQuestion.cshtml" />
+    <Content Include="Views\Teacher\EditQuestionSelect.cshtml" />
+    <Content Include="Views\Teacher\EditQuestionSelectAjax.cshtml" />
+    <Content Include="Views\Teacher\Error.cshtml" />
+    <Content Include="Views\Teacher\ExamAccess.cshtml" />
+    <Content Include="Views\Teacher\ExamAccessAjax.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Teacher\IndexExams.cshtml" />
+    <Content Include="Views\Teacher\IndexIssues.cshtml" />
+    <Content Include="Views\Teacher\IndexQualification.cshtml" />
+    <Content Include="Views\Teacher\IssueComplete.cshtml" />
+    <Content Include="Views\Teacher\LaTex.cshtml" />
+    <Content Include="Views\Teacher\NewQuestion.cshtml" />
+    <Content Include="Views\Teacher\QuestionQualification.cshtml" />
+    <Content Include="Views\Teacher\ResumeExams.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56812</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44374/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

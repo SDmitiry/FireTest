@@ -1,0 +1,26 @@
+﻿@if (Model != false)
+{
+    using (Ajax.BeginForm("BattleInvitePopup", "Battles", new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "popup_invite",
+        LoadingElementId = "loadingIndicator",
+    }))
+    {
+        <label class="button_invite"><input type="submit" /></label>
+        <style>
+            .battlesWidth{
+                width: 150px!important;
+            }
+        </style>
+    }
+}
+@if (ViewBag.UpdateCalendar == true)
+{
+    <style>
+        .updateCalendar {
+            visibility: visible !important;
+        }
+    </style>
+}

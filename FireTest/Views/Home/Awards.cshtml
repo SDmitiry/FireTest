@@ -1,0 +1,26 @@
+﻿@model FireTest.Models.Awards
+<div class="awards">
+    <div class="textback center">
+        <h3>Награды за поединки</h3>
+        <br />
+        @foreach (var item in Model.Battles)
+        {
+            <img src="~/Content/@item" />
+        }
+        @if (Model.Battles.Count == 0)
+        {
+            <div>Пока еще не получены</div>
+        }
+        <hr />
+        <h3>Награды по уровню подготовки</h3>
+        <br />
+        @foreach (var item in Model.Qualification)
+        {
+            <img src="~/Content/@item" />
+        }
+        @if (Model.Qualification.Count == 0)
+        {
+            <div>Пока еще не получены</div>
+        }
+    </div>
+</div>

@@ -1,0 +1,19 @@
+﻿@model List<FireTest.Models.FacultyQualifications>
+@{
+    ViewBag.Title = "Выбор уровня подготовки";
+}
+@Styles.Render("~/Content/battle")
+<div class="row center"><h3>Выберите уровень подготовки чтобы пригласить @ViewBag.SecondPlayer</h3></div>
+<div id="BattleQualification" class="row">
+    @{
+        for (int i = 0; i < Model.Count(); i++)
+        {
+            <div class="col-2 center facultyQualifications">
+                <a href="/Battles/Wait/?course=@(i+1)&IdBattle=@ViewBag.Id">
+                    <img class="" src="~/Images/Qualifications/@Model[i].Picture" />
+                    <p>@Model[i].Name</p>
+                </a>
+            </div>
+        }
+    }
+</div>

@@ -1,0 +1,117 @@
+﻿@model FireTest.Models.EditViewModel
+@Styles.Render("~/Content/manage")
+@{
+    ViewBag.Title = "Управление учетной записью";
+}
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div class="row">
+    <div class="col-4 manageAvatar">
+        <img src="@Html.Raw(Model.Avatar)" alt="Аватар пользователя: @Model.Name" />
+    </div>
+    <div class="col-8 manageDisabled">
+        @using (Html.BeginForm("Edit", "Manage", FormMethod.Post, new { role = "form", id = "edit" }))
+            {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("UserId", (string)ViewBag.User)
+
+            <div class="row">
+                @Html.LabelFor(m => m.Name, new { @class = "col-4" })
+                <div class="col-8">
+                        @Html.TextBoxFor(m => m.Name)
+                        <span class="pen"></span>
+                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+                <div class="row">
+                    @Html.LabelFor(m => m.SubName, new { @class = "col-4" })
+                    <div class="col-8">
+                            @Html.TextBoxFor(m => m.SubName)
+                            <span class="pen"></span>
+                            @Html.ValidationMessageFor(m => m.SubName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(m => m.Family, new { @class = "col-4" })
+                    <div class="col-8">
+                            @Html.TextBoxFor(m => m.Family)
+                            <span class="pen"></span>
+                            @Html.ValidationMessageFor(m => m.Family, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(m => m.Year, new { @class = "col-4" })
+                    <div class="col-8">
+                            @Html.TextBoxFor(m => m.Year)
+                            <span class="pen"></span>
+                            @Html.ValidationMessageFor(m => m.Year, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(m => m.Age, new { @class = "col-4" })
+                    <div class="col-8">
+                            @Html.TextBoxFor(m => m.Age)
+                            <span class="pen"></span>
+                            @Html.ValidationMessageFor(m => m.Age, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(m => m.Sex, new { @class = "col-4" })
+                    <div class="col-8">
+                            <input id="SexM" type="radio" name="Sex" value="true" @(Model.Sex ? "checked" : "") />
+                            <label for="SexM"><span>М</span></label>
+                            <input id="SexF" type="radio" name="Sex" value="false" @(Model.Sex ? "" : "checked") />
+                            <label for="SexF"><span>Ж</span></label>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(m => m.Faculty, new { @class = "col-4" })
+                    <div class="col-8">
+                        @Html.DropDownListFor(m => m.Faculty, Model.FacultyOptions)
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(m => m.Group, new { @class = "col-4" })
+                    <div class="col-8">
+                        @Html.TextBoxFor(m => m.Group)
+                        <span class="pen"></span>
+                        @Html.ValidationMessageFor(m => m.Group, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                    <div class="row">
+                        @Html.LabelFor(m => m.Region, new { @class = "col-4" })
+                        <div class="col-8">
+                            @Html.DropDownListFor(m => m.Region, Model.RegionOptions)
+                        </div>
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(m => m.NewPassword, new { @class = "col-4 control-label" })
+                        <div class="col-8">
+                            @Html.PasswordFor(m => m.NewPassword)
+                        </div>
+                        <p>Если оставить поле пустым, то пароль не изменится</p>
+                    </div>
+                <div class="row center">
+                    <input type="submit" class="button" value="Сохранить изменения" />
+                </div>
+        }
+    </div>
+</div>
+<div class="row center">
+    <a href="~/Administrator/Users">Вернуться к списку пользователей</a>
+</div>@section scripts
+{
+    @Scripts.Render("~/bundles/jquerymask")
+    <script>
+        $("#Year").inputmask("9999");
+        $("#Age").inputmask("9999");
+        $("#Year").focusout(function (e) {
+            var year = $("#Year").val();
+            if (year <= 1966) {
+                $("#Year").val(1966);
+            }
+            if (year >= @DateTime.Now.Year)  {
+                $("#Year").val(@DateTime.Now.Year);
+            }
+        });
+    </script>
+}

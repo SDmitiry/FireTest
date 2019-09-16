@@ -1,0 +1,44 @@
+﻿@if (ViewBag.Del == true)
+{
+    {
+        ViewBag.Title = "Убрать вопрос из уровня подготовки";
+    }
+    <div class="row">
+        <h3>Действительно хотите убрать вопрос:</h3>
+        <div class="textback">@ViewBag.Question</div>
+        <h3>из уровня подготовки: "@ViewBag.Qualification"?</h3>
+    </div>
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row center">
+            <input type="submit" value="Убрать" class="button" name="Action" />
+        </div>
+        <div class="row center">
+            <input type="submit" value="Назад" class="button-Cancel" name="Action" />
+        </div>
+    }
+}
+else
+{
+    {
+        ViewBag.Title = "Добавить вопрос в уровень подготовки";
+    }
+    <div class="row">
+        <h3>Выберите уровень подготовки, в которую добавить вопрос:</h3>
+        <div class="textback">@ViewBag.Question</div>
+    </div>
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            @Html.DropDownList("QualificationsList", ViewBag.QualificationsList as SelectList)
+        </div>
+        <div class="row center">
+            <input type="submit" value="Добавить" class="button" name="Action" />
+        </div>
+        <div class="row center">
+            <input type="submit" value="Назад" class="button-Cancel" name="Action" />
+        </div>
+    }
+}

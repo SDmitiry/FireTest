@@ -1,0 +1,212 @@
+﻿<script>
+    var option = {
+        responsive: true,
+        legend: {
+            display: true,
+            labels: {
+                fontSize: 20,
+                fontColor: "#c4bd97"
+            }
+        },
+        animation: {
+            animateRotate: false
+        },
+        tooltips: {
+            enabled: true
+        },
+    };
+    var optionQ = {
+        responsive: true,
+        legend: {
+            display: false
+        },
+        tooltips: {
+            enabled: true
+        },
+        percentageInnerCutout: 10
+    };
+    var configA = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [@ViewBag.Answers, @ViewBag.AnswersCorrect],
+                backgroundColor: [
+                    "#ff7300",
+                    "#70bee6",
+                ],
+            }],
+            labels: [
+                "Неправильные ответы",
+                "Правильные ответы",
+            ]
+        },
+        options: option
+    };
+    var configB = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [@ViewBag.BattlesLose, @ViewBag.BattlesWin],
+                backgroundColor: [
+                    "#ff7300",
+                    "#70bee6",
+                ],
+            }],
+            labels: [
+                "Поражения в поединках",
+                "Победы в поединках",
+            ]
+        },
+        options: option
+    };
+    var configQ1 = {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [@ViewBag.QualificationRight[0], 100-@ViewBag.QualificationRight[0]],
+                backgroundColor: [
+                    "#ff7300",
+                    "#70bee6",
+                ],
+            }],
+            labels: ["Изучено", "Не изучено"]
+        },
+        options: optionQ,
+    };
+    var configQ2 = {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [@ViewBag.QualificationRight[1], 100-@ViewBag.QualificationRight[1]],
+                backgroundColor: [
+                    "#ff7300",
+                    "#70bee6",
+                ],
+            }],
+            labels: ["Изучено", "Не изучено"]
+        },
+        options: optionQ
+    };
+    var configQ3 = {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [@ViewBag.QualificationRight[2], 100-@ViewBag.QualificationRight[2]],
+                backgroundColor: [
+                    "#ff7300",
+                    "#70bee6",
+                ],
+            }],
+            labels: ["Изучено", "Не изучено"]
+        },
+        options: optionQ
+    };
+    var configQ4 = {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [@ViewBag.QualificationRight[3], 100-@ViewBag.QualificationRight[3]],
+                backgroundColor: [
+                    "#ff7300",
+                    "#70bee6",
+                ],
+            }],
+            labels: ["Изучено", "Не изучено"]
+        },
+        options: optionQ
+    };
+    var configQ5 = {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [@ViewBag.QualificationRight[4], 100-@ViewBag.QualificationRight[4]],
+                backgroundColor: [
+                    "#ff7300",
+                    "#70bee6",
+                ],
+            }],
+            labels: ["Изучено", "Не изучено"]
+        },
+        options: optionQ
+    };
+    var chartA = document.getElementById("chartA");
+    var PieChartA = new Chart(chartA, configA);
+    var chartB = document.getElementById("chartB");
+    var PieChartB = new Chart(chartB, configB);
+    var chartQ1 = document.getElementById("chartQ1");
+    var PieChartQ1 = new Chart(chartQ1, configQ1);
+    var chartQ2 = document.getElementById("chartQ2");
+    var PieChartQ2 = new Chart(chartQ2, configQ2);
+    var chartQ3 = document.getElementById("chartQ3");
+    var PieChartQ3 = new Chart(chartQ3, configQ3);
+    var chartQ4 = document.getElementById("chartQ4");
+    var PieChartQ4 = new Chart(chartQ4, configQ4);
+    var chartQ5 = document.getElementById("chartQ5");
+    var PieChartQ5 = new Chart(chartQ5, configQ5);
+</script>
+<div class="row">
+    <div class="col-6">
+        <div class="col-offset-1 col-10 textback center" style="font-size: 20px">Количество правильных ответов</div>
+    </div>
+    <div class="col-6">
+        <div class="col-offset-1 col-10 textback center" style="font-size: 20px">Количество поединков</div>
+    </div>
+</div>
+@*<div class="row">
+    <div class="col-6">
+        <div class="col-offset-1 col-10 center">            
+            <div class="row Correct"><div class="lineCorrect"></div><h3>Правильные ответы</h3></div>
+            <div class="row Wrong"><div class="lineWrong"></div><h3>Неверные ответы</h3></div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="col-offset-1 col-10 center">
+            <div class="row Correct"><div class="lineCorrect"></div><h3>Победы в поединках</h3></div>
+            <div class="row Wrong"><div class="lineWrong"></div><h3>Поражения в поединках</h3></div>
+        </div>
+    </div>
+</div>*@
+<div class="row">
+    <div class="col-6">
+        <canvas id="chartA" />
+    </div>
+    <div class="col-6">
+        <canvas id="chartB" />
+    </div>
+</div>
+<div class="row">
+    <div class="textback center" style="font-size: 20px">Уровень подготовки в %</div>
+
+    <div class="col-offset-1 col-2">
+        <div class="center break" style="font-size: 20px">Пожарный</div>
+    </div>
+    <div class="col-2">
+        <div class="center break" style="font-size: 20px">Командир отделения</div>
+    </div>
+    <div class="col-2">
+        <div class="center break" style="font-size: 20px">Начальник караула</div>
+    </div>
+    <div class="col-2">
+        <div class="center break" style="font-size: 20px">Инспектор</div>
+    </div>
+    <div class="col-2">
+        <div class="center break" style="font-size: 20px">Инженер ПБ</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-offset-1 col-2">
+        <canvas id="chartQ1" />
+    </div>
+    <div class="col-2">
+        <canvas id="chartQ2" />
+    </div>
+    <div class="col-2">
+        <canvas id="chartQ3" />
+    </div>
+    <div class="col-2">
+        <canvas id="chartQ4" />
+    </div>
+    <div class="col-2">
+        <canvas id="chartQ5" />
+    </div>
+</div>

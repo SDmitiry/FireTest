@@ -1,0 +1,54 @@
+﻿@model IEnumerable<FireTest.Models.Examination>
+<div class="substrate">
+    <div class="row"><h3>Планировщик тестирований</h3></div>
+    <div class="row">Выберите созданные вами тесты и назначьте дату конкретной учебной группе для их прохождения</div>
+    <div class="row" id="Tests">
+        <table>
+            <tr>
+                <th width="50%">
+                    Запланированные тестирования:
+                </th>
+                <th width="10%">Группа</th>
+                <th width="10%">Дата</th>
+                <th>
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                        @if (item.Date == DateTime.Today)
+                        {
+                            @Html.ActionLink("Начать экзамен", "ExamAccess", "Teacher", new { id = item.Id }, new { @class = "mini-button" })
+                        }
+                    </td>
+                    <td>
+                        @if (item.Group == "-1")
+                        {
+                            <span>Преподаватели</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Group)
+                        }
+                    </td>
+                    <td>
+                        @String.Format("{0:dd.MM.yyyy}", item.Date)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Итоги", "ResumeExams", "Teacher", new { id = item.Id }, null) |
+                        @Html.ActionLink("Редактировать", "EditExams", "Teacher", new { id = item.Id }, null) |
+                        @Html.ActionLink("Подробности", "DetailsExams", "Teacher", new { id = item.Id }, null) |
+                        @Html.ActionLink("Удалить", "DeleteExams", "Teacher", new { id = item.Id }, null)
+                    </td>
+                </tr>
+            }
+        </table>
+        <div class="row">
+            <div class="col-4">
+                <a href="../Teacher/CreateExam"><button class="button" style="width: 90%;">Запланировать тестирование</button></a>
+            </div>
+        </div>
+    </div>
+</div>
